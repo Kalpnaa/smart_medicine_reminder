@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Medicine Reminder</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Prescription Image</h1>
+        
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="prescription_image" accept="image/*" required>
+            <button type="submit">Process Image</button>
+        </form>
+
+        <hr>
+
+        <h2>Extracted Medicine Details</h2>
+        <div id="medicine-details">
+            {% if medicine_name %}
+                <p><strong>Medicine Name:</strong> {{ medicine_name }}</p>
+                <p><strong>Dosage:</strong> {{ dosage }}</p>
+                <p><strong>Frequency:</strong> {{ frequency }}</p>
+                <p><strong>Duration:</strong> {{ duration }}</p>
+                <p class="success-message">Medicine details saved to database!</p>
+            {% elif error_message %}
+                <p class="error-message">Error: {{ error_message }}</p>
+            {% else %}
+                <p>Upload an image to extract medicine information.</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
